@@ -923,11 +923,13 @@ setwd("../")
 
   normalized.counts <- counts(dds, normalized=TRUE)
   rownames(normalized.counts) <- gsub(rownames(normalized.counts),pattern="\\..*$", replacement="")
-  rownames(normalized.counts) <- as.vector(mapIds(org.Hs.eg.db,
-                                                  keys=rownames(normalized.counts),
-                                                  column="SYMBOL",
-                                                  keytype="ENSEMBL",
-                                                  multiVals="first"))
+  new.ids <- as.vector(mapIds(org.Hs.eg.db,
+            keys=rownames(normalized.counts),
+            column="SYMBOL",
+            keytype="ENSEMBL",
+            multiVals="first"))
+  new.ids[is.na(new.ids)] <- rownames(normalized.counts)[is.na(new.ids)]
+  rownames(normalized.counts) <- new.ids
   normalized.counts <- normalized.counts[!is.na(rownames(normalized.counts)),]
   normalized.counts <- normalized.counts[order(rownames(normalized.counts)),]
   normalized.counts <- t(normalized.counts)
@@ -1245,11 +1247,13 @@ if(! paired.samples) {
   
   normalized.counts <- cpm(edgeR.dge, log=FALSE)
   rownames(normalized.counts) <- gsub(rownames(normalized.counts),pattern="\\..*$", replacement="")
-  rownames(normalized.counts) <- as.vector(mapIds(org.Hs.eg.db,
-                                                  keys=rownames(normalized.counts),
-                                                  column="SYMBOL",
-                                                  keytype="ENSEMBL",
-                                                  multiVals="first"))
+  new.ids <- as.vector(mapIds(org.Hs.eg.db,
+            keys=rownames(normalized.counts),
+            column="SYMBOL",
+            keytype="ENSEMBL",
+            multiVals="first"))
+  new.ids[is.na(new.ids)] <- rownames(normalized.counts)[is.na(new.ids)]
+  rownames(normalized.counts) <- new.ids
   normalized.counts <- normalized.counts[!is.na(rownames(normalized.counts)),]
   normalized.counts <- normalized.counts[order(rownames(normalized.counts)),]
   normalized.counts <- t(normalized.counts)
