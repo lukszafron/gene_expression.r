@@ -5,7 +5,26 @@ cat("Program path:", unlist(strsplit(grep(commandArgs(), pattern = "file=", valu
 args <- commandArgs(trailingOnly=TRUE)
 
 if(length(args)<19 | length(args)>20) {
-  stop("Nineteen arguments must be supplied in the following order (Destination dir, suffix, mapping dir, gtf file, strand specificity, alpha value, FC threshold, filtering functions, threads, CSV file, sample column, grouping column, group, TXT file, list of comparisons to perform, logical argumant indicating if the samples used in the analysis are paired, name of a column with pair identifiers, logical indicator determining if the FDR correction should be aplied in the TOST analysis of equivalence, and independent factor variable(s) (one or two)).") }
+  stop("This application requires nineteen arguments provided in the following order:
+       1 - Destination directory
+       2 - suffix
+       3 - mapping directory
+       4 - gtf file
+       5 - strand specificity
+       6 - alpha value
+       7 - FC threshold
+       8 - filtering functions
+       9 - number of CPU threads
+       10 - CSV file
+       11 - sample column name
+       12 - grouping column name 
+       13 - group name
+       14 - TXT file containing the list of genes (one gene per line) to assess the gene signature
+       15 - the list of comparisons to perform
+       16 - a logical argument indicating if the samples used in the analysis are paired
+       17 - the name of a column with pair identifiers
+       18 - a logical indicator determining if the FDR correction should be applied in the TOST analysis of equivalence
+       19 - independent factor variable(s) (one or two)).") }
 
 args.backup <- args
 read.args <- function() {
