@@ -1,6 +1,6 @@
 # $${\color{lightgreen}Gene\\_expression.r}$$
 
-
+This program enables the automation of the differential gene expression analysis in the DESeq2 and edgeR apps.
 
 This application requires nineteen arguments provided in the following order:
 
